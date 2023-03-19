@@ -1,13 +1,13 @@
-package com.example.searchservice;
+package com.search.searchapiserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SearchServiceApplication {
+public class SearchApiServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SearchServiceApplication.class, args);
+        SpringApplication.run(SearchApiServerApplication.class, args);
     }
 
 }
