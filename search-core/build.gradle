@@ -24,9 +24,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     runtimeOnly 'com.h2database:h2'
 
-    // 3. querydsl dependencies 추가
+    //querydsl dependencies
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
     implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
+
+    //webflux
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
 }
 
 test {

@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### API KEY###
+search-core/src/main/resources/application-API-KEY.yml
