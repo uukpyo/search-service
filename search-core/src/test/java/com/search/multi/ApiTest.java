@@ -1,7 +1,6 @@
 package com.search.multi;
 
 import com.search.multi.api.WebClientApi;
-import com.search.multi.data.dto.BlogResponseDto;
 import com.search.multi.data.dto.api.*;
 
 import com.search.multi.data.dto.basic.ResponseDto;
@@ -78,7 +77,7 @@ class ApiTest {
         header.add("Authorization", "KakaoAK "+ apiKey);
 
         KakaoBlogApiResponseDto result = new KakaoBlogApiResponseDto();
-        Mono<KakaoBlogApiResponseDto> data =  webClientApi.getApiForMonoNotError(apiUrl, kakaoParamsMap, header, result);
+        Mono<KakaoBlogApiResponseDto> data =  webClientApi.getApiForMono(apiUrl, kakaoParamsMap, header, result);
         result = data.block();
         assertThat(result.getMeta()).isNotNull();
         assertThat(result.getDocuments()).isNotNull();
@@ -99,6 +98,8 @@ class ApiTest {
         NaverBlogApiReponseDto result = new NaverBlogApiReponseDto();
         Mono<NaverBlogApiReponseDto> data =  webClientApi.getApiForMono(apiUrl, naverParamsMap, header, result);
         result = data.block();
+        System.out.println(data);
+        System.out.println(result);
         assertThat(result.getDisplay()).isNotNull();
         assertThat(result.getStart()).isNotNull();
         assertThat(result.getLastBuildDate()).isNotNull();
@@ -115,7 +116,7 @@ class ApiTest {
         //header.add("Authorization", "KakaoAK "+ apiKey);
 
         KakaoBlogApiResponseDto result = new KakaoBlogApiResponseDto();
-        Mono<KakaoBlogApiResponseDto> data =  webClientApi.getApiForMonoNotError(apiUrl, kakaoParamsMap, header, result);
+        Mono<KakaoBlogApiResponseDto> data =  webClientApi.getApiForMono(apiUrl, kakaoParamsMap, header, result);
         result = data.block();
         assertThat(result.getMeta()).isNull();
         assertThat(result.getDocuments()).isNull();
@@ -146,7 +147,7 @@ class ApiTest {
 
         KakaoBlogApiResponseDto result = new KakaoBlogApiResponseDto();
         NaverBlogApiReponseDto resultNaver = new NaverBlogApiReponseDto();
-        Mono<KakaoBlogApiResponseDto> data =  webClientApi.getApiForMonoNotError(apiUrl, kakaoParamsMap, header, result);
+        Mono<KakaoBlogApiResponseDto> data =  webClientApi.getApiForMono(apiUrl, kakaoParamsMap, header, result);
         var resultData = data.blockOptional().get().getDocuments();
 
         if(resultData == null){
@@ -168,7 +169,7 @@ class ApiTest {
         //header.add("Authorization", "KakaoAK "+ apiKey);
 
         KakaoBlogApiResponseDto result = new KakaoBlogApiResponseDto();
-        Mono<KakaoBlogApiResponseDto> data =  webClientApi.getApiForMonoNotError(apiUrl, kakaoParamsMap, header, result);
+        Mono<KakaoBlogApiResponseDto> data =  webClientApi.getApiForMono(apiUrl, kakaoParamsMap, header, result);
         var resultData = data.blockOptional().get().getDocuments();
 
         if(resultData == null){

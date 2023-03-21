@@ -1,7 +1,7 @@
 package com.search.multi.data.dto.api;
 
 
-import com.search.multi.data.dto.BlogResponseDto;
+
 import lombok.*;
 
 import java.util.Date;
