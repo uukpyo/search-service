@@ -1,3 +1,5 @@
 spring:
   profiles:
-    include: API-KEY
+    include: "API-KEY"
+  config:
+    use-legacy-processing: true
