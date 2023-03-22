@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    include: "API-KEY"
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher

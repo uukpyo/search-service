@@ -2,15 +2,19 @@ package com.search.multi.data.entity;
 
 import jdk.jfr.Description;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import reactor.core.publisher.Mono;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 @ToString
@@ -32,7 +36,7 @@ public class BlogSearchEntity {
     private String longSearchWord;
 
     /** 검색수 */
-    @Column(nullable = false)
+    @ColumnDefault("1")
     private Long cnt;
 
     /** 저장일 */

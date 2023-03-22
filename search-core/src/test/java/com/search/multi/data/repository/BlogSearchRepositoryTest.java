@@ -20,6 +20,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Mono;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -187,18 +188,6 @@ class BlogSearchRepositoryTest {
     @Nested
     @DisplayName("실패케이스")
     class FailCase {
-        @Test
-        public void 블로그검색엔티티_cnt_nullable_false(){
-            // given
-            BlogSearchEntity nextSearchEntity = BlogSearchEntity.builder()
-                    .searchWord("두번째검색어")
-                    .longSearchWord("두번째긴검색어")
-                    //.cnt(10l)
-                    .build();
-
-            //when & then
-            Assertions.assertThatThrownBy(() -> blogSearchRepository.save(nextSearchEntity)).isInstanceOf(DataIntegrityViolationException.class);
-        }
         @Test
         public void 블로그검색엔티티_searchWord_unique_true(){
             // given

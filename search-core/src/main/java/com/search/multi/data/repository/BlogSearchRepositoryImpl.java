@@ -3,10 +3,13 @@ package com.search.multi.data.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.search.multi.data.dto.search.BlogResponseDto;
+import com.search.multi.data.entity.BlogSearchEntity;
 import com.search.multi.data.entity.QBlogSearchEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -28,6 +31,16 @@ public class BlogSearchRepositoryImpl implements BlogSearchRepositoryCustom{
                 .from(blogSearchEntity)
                 .orderBy(blogSearchEntity.cnt.desc())
                 .limit(cnt)
+                .fetch();
+    }
+
+    @Override
+    @Description("검색어 조회")
+    public List<BlogSearchEntity> findBlogSearchEntityByQuery(String query) {
+        return queryFactory
+                .selectFrom(blogSearchEntity)
+                .where(blogSearchEntity.searchWord.eq(query).or(blogSearchEntity.longSearchWord.eq(query)))
+                .limit(1)
                 .fetch();
     }
 }
