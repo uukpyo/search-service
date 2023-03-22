@@ -1,4 +1,4 @@
-package com.search.multi.controller.Rest;
+package com.search.multi.controller;
 
 import com.search.multi.data.dto.search.BlogRequestDto;
 import com.search.multi.data.dto.basic.ResponseDto;

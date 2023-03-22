@@ -1,4 +1,4 @@
-package com.search.multi.controller.exception;
+package com.search.multi.exception;
 
 
 import com.search.multi.data.dto.basic.ResponseDto;
