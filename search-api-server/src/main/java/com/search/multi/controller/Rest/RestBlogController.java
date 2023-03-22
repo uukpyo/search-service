@@ -1,17 +1,13 @@
 package com.search.multi.controller.Rest;
 
-import com.search.multi.data.BlogRequestDto;
+import com.search.multi.data.dto.search.BlogRequestDto;
 import com.search.multi.data.dto.basic.ResponseDto;
 import com.search.multi.data.dto.basic.RtnCode;
-import com.search.multi.data.keyfile.ApiValue;
 import com.search.multi.service.Interface.ApiService;
-import com.search.multi.service.KakaoApiServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

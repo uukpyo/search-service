@@ -1,4 +1,4 @@
-package com.search.multi.data;
+package com.search.multi.data.dto.search;
 
 import lombok.Builder;
 import lombok.Data;
