@@ -1,4 +1,4 @@
-package com.search.multi.data.dto.api;
+package com.search.multi.data.dto.api.naver;
 
 
 import lombok.*;
@@ -18,12 +18,3 @@ public class NaverBlogApiReponseDto {
     private List<ItemsDto> items;
 }
 
-@Data
-class ItemsDto{
-    private String title;
-    private String link;
-    private String description;
-    private String bloggername;
-    private String bloggerlink;
-    private Date postdate;
-}

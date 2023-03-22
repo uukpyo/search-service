@@ -1,4 +1,4 @@
-package com.search.multi.data.dto.api;
+package com.search.multi.data.dto.api.kakao;
 
 import lombok.Builder;
 import lombok.Getter;

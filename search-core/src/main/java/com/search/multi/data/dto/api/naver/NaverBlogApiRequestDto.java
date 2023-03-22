@@ -1,9 +1,11 @@
-package com.search.multi.data.dto.api;
+package com.search.multi.data.dto.api.naver;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class NaverBlogApiRequestDto {
     private String query;
     private String sort;
