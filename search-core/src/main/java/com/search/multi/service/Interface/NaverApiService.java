@@ -1,8 +1,7 @@
 package com.search.multi.service.Interface;
 
 
-import com.search.multi.data.BlogRequestDto;
-import com.search.multi.data.dto.api.NaverBlogApiReponseDto;
+import com.search.multi.data.dto.search.BlogRequestDto;
 import reactor.core.publisher.Mono;
 
 public interface NaverApiService<T> {

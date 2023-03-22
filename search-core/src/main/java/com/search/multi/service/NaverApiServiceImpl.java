@@ -1,12 +1,10 @@
 package com.search.multi.service;
 
 import com.search.multi.api.WebClientApi;
-import com.search.multi.data.BlogRequestDto;
-import com.search.multi.data.dto.api.KakaoBlogApiResponseDto;
-import com.search.multi.data.dto.api.NaverBlogApiReponseDto;
-import com.search.multi.data.dto.api.NaverBlogApiRequestDto;
+import com.search.multi.data.dto.search.BlogRequestDto;
+import com.search.multi.data.dto.api.naver.NaverBlogApiReponseDto;
+import com.search.multi.data.dto.api.naver.NaverBlogApiRequestDto;
 import com.search.multi.data.keyfile.ApiValue;
-import com.search.multi.service.Interface.KakaoApiService;
 import com.search.multi.service.Interface.NaverApiService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -18,13 +16,13 @@ import reactor.core.publisher.Mono;
 @Service
 @RequiredArgsConstructor
 @Log4j2
-public class NaverApiServiceImpl implements NaverApiService {
+public class NaverApiServiceImpl<T> implements NaverApiService {
 
     private final ApiValue api;
     private final WebClientApi webClientApi;
 
     @Override
-    public Mono<NaverBlogApiReponseDto> getNaverApi(BlogRequestDto blogRequestDto) {
+    public Mono<T> getNaverApi(BlogRequestDto blogRequestDto) {
         log.info("NAVER API START");
         String clientId = api.getNaverClientId();
         String secretKey = api.getNaverSecretKey();
@@ -54,7 +52,7 @@ public class NaverApiServiceImpl implements NaverApiService {
         header.add("X-Naver-Client-Secret", secretKey);
 
         NaverBlogApiReponseDto result = new NaverBlogApiReponseDto();
-        Mono<NaverBlogApiReponseDto> data =  webClientApi.getApiForMono(apiUrl, naverParamsMap, header, result);
+        Mono<T> data =  webClientApi.getApiForMono(apiUrl, naverParamsMap, header, result);
         log.info("NAVER API END");
         return data;
     }

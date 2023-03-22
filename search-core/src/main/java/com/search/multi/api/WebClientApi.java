@@ -1,24 +1,16 @@
 package com.search.multi.api;
 
-import com.search.multi.data.dto.api.KakaoBlogApiResponseDto;
 import com.search.multi.exception.ApiResponseException;
-import com.search.multi.exception.NotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.reactive.function.client.ClientRequest;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 
-import java.time.Duration;
-import java.util.Map;
-import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 
 @Component
