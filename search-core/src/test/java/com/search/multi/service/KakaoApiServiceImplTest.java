@@ -11,6 +11,7 @@ import lombok.extern.log4j.Log4j2;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -50,35 +51,42 @@ class KakaoApiServiceImplTest {
         kakaoParamsMap.add("sort", kakaoReqDto.getSort());
     }
 
-    @Test
-    @DisplayName("kakao api 연결 성공 테스트")
-    void kakaoApiSuccess() {
-        String apiKey = api.getKakaoApiKey();
-        String apiUrl = api.getKakaoApiUrl();
+    @Nested
+    @DisplayName("성공케이스")
+    class SuccessCase {
+        @Test
+        @DisplayName("kakao api 연결 성공 테스트")
+        void kakaoApiSuccess() {
+            String apiKey = api.getKakaoApiKey();
+            String apiUrl = api.getKakaoApiUrl();
 
-        MultiValueMap<String, String> header = new LinkedMultiValueMap<>();
-        header.add("Authorization", "KakaoAK "+ apiKey);
+            MultiValueMap<String, String> header = new LinkedMultiValueMap<>();
+            header.add("Authorization", "KakaoAK "+ apiKey);
 
-        KakaoBlogApiResponseDto result = new KakaoBlogApiResponseDto();
-        Mono<KakaoBlogApiResponseDto> data =  webClientApi.getApiForMono(apiUrl, kakaoParamsMap, header, result);
-        result = data.block();
-        assertThat(result.getMeta()).isNotNull();
-        assertThat(result.getDocuments()).isNotNull();
+            KakaoBlogApiResponseDto result = new KakaoBlogApiResponseDto();
+            Mono<KakaoBlogApiResponseDto> data =  webClientApi.getApiForMono(apiUrl, kakaoParamsMap, header, result);
+            result = data.block();
+            assertThat(result.getMeta()).isNotNull();
+            assertThat(result.getDocuments()).isNotNull();
+        }
     }
 
-    @Test
-    @DisplayName("kakao api 연결 실패 테스트")
-    void kakaoApiFail() {
-        String apiKey = api.getKakaoApiKey();
-        String apiUrl = api.getKakaoApiUrl();
+    @Nested
+    @DisplayName("실패케이스")
+    class FailCase {
+        @Test
+        @DisplayName("kakao api 연결 실패 테스트")
+        void kakaoApiFail() {
+            String apiKey = api.getKakaoApiKey();
+            String apiUrl = api.getKakaoApiUrl();
 
-        MultiValueMap<String, String> header = new LinkedMultiValueMap<>();
-        //header.add("Authorization", "KakaoAK "+ apiKey);
+            MultiValueMap<String, String> header = new LinkedMultiValueMap<>();
+            //header.add("Authorization", "KakaoAK "+ apiKey);
 
-        KakaoBlogApiResponseDto result = new KakaoBlogApiResponseDto();
-        Mono<KakaoBlogApiResponseDto> data =  webClientApi.getApiForMono(apiUrl, kakaoParamsMap, header, result);
-        Assertions.assertThatThrownBy(() -> data.block()).isInstanceOf(ApiResponseException.class);
+            KakaoBlogApiResponseDto result = new KakaoBlogApiResponseDto();
+            Mono<KakaoBlogApiResponseDto> data = webClientApi.getApiForMono(apiUrl, kakaoParamsMap, header, result);
+            Assertions.assertThatThrownBy(() -> data.block()).isInstanceOf(ApiResponseException.class);
+        }
     }
-
 
 }

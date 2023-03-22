@@ -11,6 +11,7 @@ import lombok.extern.log4j.Log4j2;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -50,40 +51,48 @@ class NaverApiServiceImplTest {
         naverParamsMap.add("sort", naverReqDto.getSort());
     }
 
-    @Test
-    @DisplayName("naver api 연결 성공 테스트")
-    void naverApiSuccess() {
-        String clientId = api.getNaverClientId();
-        String secretKey = api.getNaverSecretKey();
-        String apiUrl = api.getNaverApiUrl();
+    @Nested
+    @DisplayName("성공케이스")
+    class SuccessCase {
+        @Test
+        @DisplayName("naver api 연결 성공 테스트")
+        void naverApiSuccess() {
+            String clientId = api.getNaverClientId();
+            String secretKey = api.getNaverSecretKey();
+            String apiUrl = api.getNaverApiUrl();
 
-        MultiValueMap<String, String> header = new LinkedMultiValueMap<>();
-        header.add("X-Naver-Client-Id", clientId);
-        header.add("X-Naver-Client-Secret", secretKey);
+            MultiValueMap<String, String> header = new LinkedMultiValueMap<>();
+            header.add("X-Naver-Client-Id", clientId);
+            header.add("X-Naver-Client-Secret", secretKey);
 
-        NaverBlogApiReponseDto result = new NaverBlogApiReponseDto();
-        Mono<NaverBlogApiReponseDto> data =  webClientApi.getApiForMono(apiUrl, naverParamsMap, header, result);
-        result = data.block();
-        System.out.println(data);
-        System.out.println(result);
-        assertThat(result.getDisplay()).isNotNull();
-        assertThat(result.getStart()).isNotNull();
-        assertThat(result.getLastBuildDate()).isNotNull();
-        assertThat(result.getTotal()).isNotNull();
+            NaverBlogApiReponseDto result = new NaverBlogApiReponseDto();
+            Mono<NaverBlogApiReponseDto> data =  webClientApi.getApiForMono(apiUrl, naverParamsMap, header, result);
+            result = data.block();
+            System.out.println(data);
+            System.out.println(result);
+            assertThat(result.getDisplay()).isNotNull();
+            assertThat(result.getStart()).isNotNull();
+            assertThat(result.getLastBuildDate()).isNotNull();
+            assertThat(result.getTotal()).isNotNull();
+        }
     }
 
-    @Test
-    @DisplayName("naver api 연결 실패 테스트")
-    void naverApiFail() {
-        String clientId = api.getNaverClientId();
-        String secretKey = api.getNaverSecretKey();
-        String apiUrl = api.getNaverApiUrl();
+    @Nested
+    @DisplayName("실패케이스")
+    class FailCase {
+        @Test
+        @DisplayName("naver api 연결 실패 테스트")
+        void naverApiFail() {
+            String clientId = api.getNaverClientId();
+            String secretKey = api.getNaverSecretKey();
+            String apiUrl = api.getNaverApiUrl();
 
-        MultiValueMap<String, String> header = new LinkedMultiValueMap<>();
-        //header.add("X-Naver-Client-Id", clientId);
-        //header.add("X-Naver-Client-Secret", secretKey);
+            MultiValueMap<String, String> header = new LinkedMultiValueMap<>();
+            //header.add("X-Naver-Client-Id", clientId);
+            //header.add("X-Naver-Client-Secret", secretKey);
 
-        NaverBlogApiReponseDto result = new NaverBlogApiReponseDto();
-        Assertions.assertThatThrownBy(() -> webClientApi.getApiForMono(apiUrl, naverParamsMap, header, result).block()).isInstanceOf(ApiResponseException.class);
+            NaverBlogApiReponseDto result = new NaverBlogApiReponseDto();
+            Assertions.assertThatThrownBy(() -> webClientApi.getApiForMono(apiUrl, naverParamsMap, header, result).block()).isInstanceOf(ApiResponseException.class);
+        }
     }
 }
